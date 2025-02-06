@@ -1,0 +1,32 @@
+# version: "3.8"
+services:
+  postgres1:
+    image: postgres:17-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: k3str4
+      POSTGRES_DB: postgres-zoomcamp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'pgadmin@pgadmin.com'
+      PGADMIN_DEFAULT_PASSWORD: 'pgadmin'
+
+    ports:
+      - '8181:80'
+    
+    volumes:
+      - vol-pgadmim-data:/var/lin/pgadmin
+
+volumes:
+  postgres-data:
+    driver: local
+  vol-pgadmim-data:
+    driver: local
